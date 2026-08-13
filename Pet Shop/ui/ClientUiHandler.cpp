@@ -72,7 +72,7 @@ void ClientUiHandler::populateList()
 
 	std::vector<Dog> dogs = this->service.getAdoptions();
 	for (auto d : dogs) {
-		QString itemInList = QString::fromStdString(d.getBreed() + " - " + d.getName() + " - " + std::to_string(d.getAge()) + " - " + d.getLink());
+		QString itemInList = QString::fromStdString("Breed: " + d.getBreed() + "\nName: " + d.getName() + "\nAge: " + std::to_string(d.getAge()) + "\nLink" + d.getLink());
 		QFont f{ "Verdana", 15 };
 		QListWidgetItem* item = new QListWidgetItem{ itemInList };
 		item->setFont(f);

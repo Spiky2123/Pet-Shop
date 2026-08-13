@@ -102,9 +102,9 @@ void AdminUiHandler::populateList()
 
 	std::vector<Dog> dogs = this->service.getAllDogs();
 	for (auto d : dogs) {
-		QString itemInList = QString::fromStdString(d.getBreed() + " - " + d.getName() + " - " + std::to_string(d.getAge()) + " - " + d.getLink());
+		QString itemInList = QString::fromStdString("Breed: " + d.getBreed() + "\nName: " + d.getName() + "\nAge: " + std::to_string(d.getAge()) + "\nLink" + d.getLink());
 		if (ui->ViewModeComboBox->currentIndex() == 1) {
-			itemInList = QString::fromStdString(d.getBreed() + " - " + d.getName());
+			itemInList = QString::fromStdString("Breed: " + d.getBreed() + "\nName: " + d.getName());
 		}
 		QFont f{ "Verdana", 15 };
 		QListWidgetItem* item = new QListWidgetItem{ itemInList };
