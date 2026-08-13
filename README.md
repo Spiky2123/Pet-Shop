@@ -9,7 +9,7 @@ This project was developed as part of an OOP course during my 2nd semester of st
 The app runs in one of two modes, chosen at startup:
 
 - **Admin mode** lets you add, remove, and update dog records, with full undo/redo support.
-- **Client mode** lets you browse the available dogs, filter them by breed, and adopt one — adoptions get saved out to a CSV or HTML file.
+- **Client mode** lets you browse the available dogs, filter them by breed, and adopt one. Adoptions get saved out to a CSV or HTML file.
 
 You also choose the storage backend at startup: a SQLite database (through the sqlite_orm library) or a plain text file, both implementing the same repository interface so the rest of the app doesn't care which one is active.
 
