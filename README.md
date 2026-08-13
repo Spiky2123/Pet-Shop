@@ -1,4 +1,4 @@
-# Pet Shop – Dog Adoption Management System
+# Pet Shop
 
 Pet Shop is a C++ desktop application built with Qt Widgets that simulates the adoption workflow of an animal shelter. It has two separate interfaces: an Admin panel for managing the dog database, and a Client panel where users can browse, filter, and adopt dogs.
 
