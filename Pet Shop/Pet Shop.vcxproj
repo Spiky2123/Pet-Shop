@@ -15,8 +15,7 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')"
-      >$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -46,11 +45,8 @@
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound"
-    BeforeTargets="CustomBuild;ClCompile"
-    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High"
-      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -67,15 +63,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)utils\sql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -96,12 +97,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="PetShop.qrc"/>
-    <QtUic Include="PetShop.ui"/>
-    <QtMoc Include="PetShop.h"/>
-    <ClCompile Include="PetShop.cpp"/>
-    <ClCompile Include="main.cpp"/>
-
+    <ClCompile Include="repository\AdoptionRepository.cpp" />
+    <ClCompile Include="repository\FileRepo.cpp" />
+    <ClCompile Include="repository\RepositoryException.cpp" />
+    <ClCompile Include="repository\SqlRepository.cpp" />
+    <ClCompile Include="repository\TextFileRepository.cpp" />
+    <ClCompile Include="service\AdminService.cpp" />
+    <ClCompile Include="service\ServiceException.cpp" />
+    <ClCompile Include="service\UndoService.cpp" />
+    <ClCompile Include="service\UserService.cpp" />
+    <ClCompile Include="ui\AdminUiHandler.cpp" />
+    <ClCompile Include="ui\ClientUiHandler.cpp" />
+    <ClCompile Include="utils\action\Action.cpp" />
+    <ClCompile Include="utils\sql\sqlite3.c" />
+    <QtRcc Include="PetShop.qrc" />
+    <ClCompile Include="domain\Dog.cpp" />
+    <ClCompile Include="domain\DogValidator.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="domain\Dog.h" />
+    <ClInclude Include="domain\DogValidator.h" />
+    <ClInclude Include="repository\AdoptionRepository.h" />
+    <ClInclude Include="repository\BaseRepository.h" />
+    <ClInclude Include="repository\FileRepo.h" />
+    <ClInclude Include="repository\RepositoryException.h" />
+    <ClInclude Include="repository\SqlRepository.h" />
+    <ClInclude Include="repository\TextFileRepository.h" />
+    <ClInclude Include="service\AdminService.h" />
+    <ClInclude Include="service\ServiceException.h" />
+    <ClInclude Include="service\UndoService.h" />
+    <ClInclude Include="service\UserService.h" />
+    <QtMoc Include="ui\AdminUiHandler.h" />
+    <QtMoc Include="ui\ClientUiHandler.h" />
+    <ClInclude Include="utils\action\Action.h" />
+    <ClInclude Include="utils\sql\sqlite3.h" />
+    <ClInclude Include="utils\sql\sqlite_orm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ui\UiAdmin.ui" />
+    <QtUic Include="ui\UiClient.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dogs.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

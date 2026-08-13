@@ -1,0 +1,16 @@
+#pragma once
+#include "Dog.h"
+
+class ValidatorException : public std::exception {
+private:
+	std::string message;
+public:
+	ValidatorException();
+	explicit ValidatorException(const std::string& _message) { this->message = _message; }
+	[[nodiscard]] const char* what() const noexcept override { return this->message.c_str(); }
+};
+
+class DogValidator {
+public:
+	static void validateDog(const Dog& dog);
+};

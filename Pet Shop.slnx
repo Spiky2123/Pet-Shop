@@ -2,5 +2,5 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="Pet Shop/Pet Shop.vcxproj" />
+  <Project Path="Pet Shop/Pet Shop.vcxproj" Id="de743cda-4272-4b97-93fa-6fcba81342f7" />
 </Solution>
