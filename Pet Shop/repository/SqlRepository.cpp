@@ -42,7 +42,7 @@ void SqlRepository::addDog(const Dog& dog)
 	if (isInRepo(dog.getId())) {
 		throw RepositoryException("Dog with ID " + std::to_string(dog.getId()) + " already exists.\n");
 	}
-	storage.insert(dog);
+	storage.replace(dog);
 }
 
 void SqlRepository::removeDog(const Dog& dog)
