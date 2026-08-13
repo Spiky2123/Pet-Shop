@@ -15,7 +15,7 @@ You also choose the storage backend at startup: a SQLite database (through the s
 
 ## Design and architecture
 
-The project is split into clear layers — domain, repository, service, and UI — so the business logic never talks directly to Qt or to a specific storage format. A few patterns came up naturally while building it:
+The project is split into clear layers: domain, repository, service, and UI, so the business logic never talks directly to Qt or to a specific storage format. A few patterns came up naturally while building it:
 
 - **Command pattern** for undo/redo: every add/remove/update is wrapped in an `Action` object that knows how to reverse itself, and `UndoService` keeps two stacks to move back and forth through history.
 - **Repository pattern** to abstract data access: `BaseRepository` is an interface implemented by both `SqlRepository` and `TextFileRepository`, so `AdminService` and `UserService` work against the interface, not a concrete database.
